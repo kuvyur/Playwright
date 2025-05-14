@@ -1,5 +1,4 @@
-import { Page, Locator } from '@playwright/test'
-import { expect } from '@playwright/test'
+import { Page, Locator, expect } from '@playwright/test'
 
 export class LoginPage {
     private page: Page
@@ -39,4 +38,10 @@ export class LoginPage {
         async checkLoginElements(): Promise<void> {
             await expect(this.usernameInput && this.passwordInput && this.loginButton).toBeVisible()
         }
-}
+
+        async loginWithCredentials(username: string, password: string) {
+            await this.enterUsername(username);
+            await this.enterPassword(password);
+            await this.clickLogin();
+        }
+    }
